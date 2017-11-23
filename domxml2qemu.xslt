@@ -38,11 +38,12 @@
 </xsl:template>
 
 <xsl:template match="devices/graphics[@type='spice']">\
--spice port=5900,addr=127.0.0.1,disable-ticketing,image-compression=off,seamless-migration=on \
+-spice port=5942,addr=127.0.0.1,disable-ticketing,image-compression=off,seamless-migration=on \
 </xsl:template>
 
 <xsl:template match="devices/disk[@type='file']">\
-  -drive file=<xsl:value-of select="source/@file"/>,format=<xsl:value-of select="driver/@type"/>,if=<xsl:value-of select="target/@bus"/>,id=drive<xsl:value-of select="position()"/> \
+  -drive file=<xsl:value-of select="source/@file"/>,format=<xsl:value-of select="driver/@type"/>,if=<xsl:value-of select="target/@bus"/>,id=drive<xsl:value-of select="position()"/>\
+<xsl:if test="readonly">,readonly=on</xsl:if> \
 </xsl:template>
 
 

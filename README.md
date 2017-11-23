@@ -13,10 +13,13 @@ but take care, libvirt does much more, and this style shet is limited to the
 Usage:
 
 ```bash
-$ xsltproc domxml2qemu.xslt fedora24.xml
+$ eval "$(xsltproc domxml2qemu.xslt fedora27.xml)" &
+$ remote-viewer spice://127.0.0.1:5942
+
+$ xsltproc domxml2qemu.xslt fedora27.xml
 /usr/bin/qemu-kvm \
-  -name fedora24 \
-  -uuid 1edb7a80-6beb-4c4e-b2f3-0ebb9647edea \
+  -name fedora27 \
+  -uuid 5a47680f-6776-4fb5-b586-463663c71747 \
   -m 8096 \
   -smp 4 \
   -machine pc-i440fx-2.3,accel=kvm \
@@ -24,25 +27,17 @@ $ xsltproc domxml2qemu.xslt fedora24.xml
 -cpu host \
   \
   -netdev user,id=hostnet1 \
-  -device rtl8139,netdev=hostnet1,id=net1,mac=52:54:00:4f:b5:e0 \
-\
-  -netdev user,id=hostnet2 \
-  -device rtl8139,netdev=hostnet2,id=net2,mac=52:54:00:bc:23:86 \
+  -device rtl8139,netdev=hostnet1,id=net1,mac=52:54:00:bc:23:86 \
  \
   \
   -device qxl,id=video1,ram_size=67108864,vram_size=67108864,vgamem_mb=16 \
  \
   \
--spice port=5900,addr=127.0.0.1,disable-ticketing,image-compression=off,seamless-migration=on \
+-spice port=5942,addr=127.0.0.1,disable-ticketing,image-compression=off,seamless-migration=on \
  \
   \
-  -drive file=/home/foobar/.local/share/libvirt/images/fedora24.qcow2,format=qcow2,if=virtio,id=drive1 \
-\
-  -drive file=/home/foobar/.local/share/libvirt/images/fedora24-1.qcow2,format=qcow2,if=virtio,id=drive2 \
+  -drive file=https://download.fedoraproject.org/pub/fedora/linux/releases/27/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-27-1.6.iso,format=raw,if=virtio,id=drive1\
+,readonly=on \
  \
   # End
-
-$ eval "$(xsltproc domxml2qemu.xslt fedora24.xml)"
-$ remote-viewer spice://1270.0.0.1:5900
-
 ```

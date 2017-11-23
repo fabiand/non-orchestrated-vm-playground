@@ -1,0 +1,43 @@
+<domain type='kvm'>
+  <name>fedora27</name>
+  <uuid>5a47680f-6776-4fb5-b586-463663c71747</uuid>
+  <memory unit='KiB'>8290304</memory>
+  <currentMemory unit='KiB'>8290304</currentMemory>
+  <vcpu placement='static'>4</vcpu>
+  <os>
+    <type arch='x86_64' machine='pc-i440fx-2.3'>hvm</type>
+  </os>
+  <cpu mode='host-model' check='partial'>
+    <model fallback='allow'/>
+  </cpu>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>restart</on_crash>
+  <pm>
+    <suspend-to-mem enabled='no'/>
+    <suspend-to-disk enabled='no'/>
+  </pm>
+  <devices>
+    <emulator>/usr/bin/qemu-kvm</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='raw'/>
+      <source file='https://download.fedoraproject.org/pub/fedora/linux/releases/27/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-27-1.6.iso'/>
+      <target bus='virtio'/>
+      <readonly/>
+    </disk>
+    <interface type='user'>
+      <mac address='52:54:00:bc:23:86'/>
+      <model type='rtl8139'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x0a' function='0x0'/>
+    </interface>
+    <graphics type='spice' autoport='yes'>
+      <listen type='address'/>
+      <image compression='off'/>
+    </graphics>
+    <video>
+      <model type='qxl' ram='65536' vram='65536' vgamem='16384' heads='1' primary='yes'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+    </video>
+  </devices>
+</domain>
+
