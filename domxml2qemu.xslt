@@ -13,7 +13,7 @@
   -m <xsl:value-of select="memory div 1024"/><!-- FIXME needs to respect unit --> \
   -smp <xsl:value-of select="vcpu"/> \
   -machine <xsl:value-of select="os/type/@machine"/>,accel=kvm \
-  <xsl:apply-templates select="cpu/model"/> \
+  <xsl:apply-templates select="cpu"/> \
   <xsl:apply-templates select="devices/interface"/> \
   <xsl:apply-templates select="devices/video"/> \
   <xsl:apply-templates select="devices/graphics"/> \
@@ -21,8 +21,11 @@
   # End
 </xsl:template>
 
-<xsl:template match="cpu/model/text()">\
-  -cpu <xsl:value-of select="cpu/model"/> \
+<xsl:template match="cpu">\
+<xsl:choose>
+  <xsl:when test="model/text()">-cpu <xsl:value-of select="cpu/model"/></xsl:when>
+  <xsl:when test="@mode='host-model'">-cpu host</xsl:when>
+</xsl:choose>
 </xsl:template>
 
 <xsl:template match="devices/interface">\
