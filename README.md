@@ -41,4 +41,8 @@ $ xsltproc domxml2qemu.xslt fedora24.xml
   -drive file=/home/foobar/.local/share/libvirt/images/fedora24-1.qcow2,format=qcow2,if=virtio,id=drive2 \
  \
   # End
+
+$ eval "$(xsltproc domxml2qemu.xslt fedora24.xml)"
+$ remote-viewer spice://1270.0.0.1:5900
+
 ```
