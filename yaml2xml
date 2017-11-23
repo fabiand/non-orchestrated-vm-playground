@@ -1,0 +1,14 @@
+#!/bin/env python3
+
+import sys
+import xmltodict
+import yaml
+
+vm = None
+if len(sys.argv) > 1:
+    with open(sys.argv[1]) as src:
+        vm = src.read()
+else:
+    vm =sys.stdin.read()
+
+print(xmltodict.unparse({"VirtualMachine": yaml.load(vm)}, pretty=True))

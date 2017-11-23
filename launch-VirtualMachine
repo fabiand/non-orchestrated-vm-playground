@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -xe
+
+usage() { echo "$0 VIRTUALMACHINE"; exit 2 ; }
+mirror() { tee /dev/stderr ; }
+getYAML() {
+if [[ -z "$1" ]]; then
+  echo "Please provide some ionput file or name" >&2
+  exit 3 
+elif [[ -f "$1" ]]; then
+  cat "$1"
+else
+  kubectl get -o yaml vms $1 ;
+fi
+}
+
+echo Args:
+echo $@
+
+echo Starting:
+getYAML "$1" \
+  | mirror | ./yaml2xml \
+  | mirror | xsltproc vmspec2domxml.xslt /dev/stdin \
+  | mirror | xsltproc domxml2qemu.xslt /dev/stdin \
+  | mirror | eval "$(cat)"

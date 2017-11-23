@@ -7,9 +7,12 @@
 </xsl:template>
 
 <xsl:template match="/domain[@type='kvm']">
-<xsl:value-of select="devices/emulator"/> \
+<xsl:choose>
+  <xsl:when test="devices/emulator/text()"><xsl:value-of select="devices/emulator"/></xsl:when>
+  <xsl:otherwise>qemu-system-x86_64</xsl:otherwise>
+</xsl:choose> \
   -name <xsl:value-of select="name"/> \
-  -uuid <xsl:value-of select="uuid"/> \
+<xsl:if test="uuid/text()">  -uuid <xsl:value-of select="uuid"/></xsl:if> \
   -m <xsl:value-of select="memory div 1024"/><!-- FIXME needs to respect unit --> \
   -smp <xsl:value-of select="vcpu"/> \
   -machine <xsl:value-of select="os/type/@machine"/>,accel=kvm \
@@ -34,7 +37,11 @@
 </xsl:template>
 
 <xsl:template match="devices/video">\
-  -device <xsl:value-of select="model/@type"/>,id=video<xsl:value-of select="position()"/>,ram_size=<xsl:value-of select="model/@ram * 1024"/>,vram_size=<xsl:value-of select="model/@vram * 1024"/>,vgamem_mb=<xsl:value-of select="model/@vgamem div 1024"/> \
+  -device <xsl:value-of select="model/@type"/>,id=video<xsl:value-of select="position()"/>\
+<xsl:if test="model/@ram">,ram_size=<xsl:value-of select="model/@ram * 1024"/></xsl:if>\
+<xsl:if test="model/@vram">,vram_size=<xsl:value-of select="model/@vram * 1024"/></xsl:if>\
+<xsl:if test="model/@vgamem">,vgamem_mb=<xsl:value-of select="model/@vgamem div 1024"/></xsl:if>\
+ \
 </xsl:template>
 
 <xsl:template match="devices/graphics[@type='spice']">\
@@ -42,10 +49,22 @@
 </xsl:template>
 
 <xsl:template match="devices/disk[@type='file']">\
-  -drive file=<xsl:value-of select="source/@file"/>,format=<xsl:value-of select="driver/@type"/>,if=<xsl:value-of select="target/@bus"/>,id=drive<xsl:value-of select="position()"/>\
-<xsl:if test="readonly">,readonly=on</xsl:if> \
+  -drive file=<xsl:value-of select="source/@file"/>\
+,format=<xsl:value-of select="driver/@type"/>\
+<xsl:if test="target/@bus">,if=<xsl:value-of select="target/@bus"/></xsl:if>\
+,id=drive<xsl:value-of select="position()"/>\
+<xsl:if test="readonly">,readonly=on</xsl:if>\
+ \
 </xsl:template>
 
+<xsl:template match="devices/disk[@type='network']">\
+  -drive file=<xsl:value-of select="source/@protocol"/>://<xsl:value-of select="source/host/@name"/>:<xsl:value-of select="source/host/@port"/>/<xsl:value-of select="source/@name"/>\
+,format=<xsl:value-of select="driver/@type"/>\
+<xsl:if test="target/@bus">,if=<xsl:value-of select="target/@bus"/></xsl:if>\
+,id=drive<xsl:value-of select="position()"/>\
+<xsl:if test="readonly">,readonly=on</xsl:if>\
+ \
+</xsl:template>
 
 </xsl:stylesheet>
 
