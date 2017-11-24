@@ -1,12 +1,12 @@
 
 domxml2qemu:
-	xsltproc launch.d/domxml2qemu.xslt data/fedora27.xml
+	xsltproc launch.d/domxml2qemu.xsl data/fedora27.xml
 
 data/%.yaml.xml: data/%.yaml
 	./launch.d/yaml2xml $< > $@
 
 vmspec2domxml: data/vm.yaml.xml
-	xsltproc launch.d/vmspec2domxml.xslt $<
+	xsltproc launch.d/vmspec2domxml.xsl $<
 
 build:
 	sudo docker build -t docker.io/fabiand/lvm .

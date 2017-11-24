@@ -18,8 +18,8 @@ echo $@
 echo Starting:
 getYAML "$1" \
   | mirror | ./launch.d/yaml2xml \
-  | mirror | xsltproc launch.d/vmspec2domxml.xslt /dev/stdin \
-  | mirror | xsltproc launch.d/domxml2qemu.xslt /dev/stdin \
+  | mirror | xsltproc launch.d/vmspec2domxml.xsl /dev/stdin \
+  | mirror | xsltproc launch.d/domxml2qemu.xsl /dev/stdin \
   | mirror > .launchline
 
 cat .launchline
