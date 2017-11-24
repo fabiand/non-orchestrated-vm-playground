@@ -28,7 +28,18 @@ $ kubectl attach -it testvm
 $ kubectl port-forward 5942
 $ remote-viewer spice://127.0.0.1:5942
 
+# To access it's monitor and qmp
+$ kubectl exec -it testvm
+  $ nc -U /qmp-sock
+  $ nc -U /monitor-sock
+```
 
+This approach also works for higher level workloads:
+
+```bash
 # Launch a deployment using the VM definition
 $ kubectl apply -f manifests/deployment.yaml
+
+# See the spawned pods
+$ kubectl get pods
 ```

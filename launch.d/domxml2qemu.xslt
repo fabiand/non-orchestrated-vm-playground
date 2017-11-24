@@ -10,7 +10,7 @@
 <xsl:choose>
   <xsl:when test="devices/emulator/text()"><xsl:value-of select="devices/emulator"/></xsl:when>
   <xsl:otherwise>qemu-system-x86_64</xsl:otherwise>
-</xsl:choose> -serial mon:stdio \
+</xsl:choose> -serial mon:stdio -qmp unix:./qmp-sock,server,nowait --monitor unix:./monitor-sock,server,nowait \
   -name <xsl:value-of select="name"/> \
 <xsl:if test="uuid/text()">  -uuid <xsl:value-of select="uuid"/></xsl:if> \
   -m <xsl:value-of select="memory div 1024"/><!-- FIXME needs to respect unit --> \

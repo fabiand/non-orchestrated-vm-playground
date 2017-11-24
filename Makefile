@@ -18,8 +18,7 @@ run-container:
 	sudo docker run --rm -it docker.io/fabiand/lvm launch applied-vm.yaml
 
 run-pod:
-	kubectl apply -f manifests/testvm-pod.yaml
-
+	kubectl apply -f manifests/pod.yaml
 
 deploy-deps:
 	kubectl apply -f manifests/iscsi-demo-target.yaml -f manifests/vm-resource.yaml
