@@ -22,5 +22,5 @@ deploy-deps:
 test: deploy-deps
 	kubectl apply -f manifests/testvm-pod.yaml
 	./kubeObjWait pods
-	timeout 300 sh -c ":>logs ; until kubectl logs -f testvm ; do sleep 3 ; done > logs & tail -f logs | tee /dev/stderr | ( grep -m1 Welcome ; kill $$? || : )"
+	timeout 300 sh -c "until kubectl logs --tail=10 testvm | grep Welcome ; do sleep 3 ; echo -n . ; done"
 	kubectl delete vms testvm
