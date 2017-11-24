@@ -22,7 +22,7 @@ In general it works as follows:
 
 The following example is generally using [this VM definition](manifests/vm.yaml)
 and [this pod definition](manifests/pod.yaml).
-In general it's worth to take a look into the `manifests/` dir.
+In general it's worth to take a look into the [`manifests/`](manifests/) dir.
 
 ## Example
 
