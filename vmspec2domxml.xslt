@@ -57,7 +57,9 @@
 
 <xsl:template match="devices/interfaces">
 <interface type="user">
-  <!--xsl:attribute name="type"><xsl:value-of select="./type"/></xsl:attribute-->
+  <model>
+    <xsl:attribute name="type"><xsl:value-of select="./model/type"/></xsl:attribute>
+  </model>
 </interface>
 </xsl:template>
 
@@ -81,6 +83,7 @@
     </target>
   </source>
   <xsl:if test="./readonly[text() = 'True']"><readonly/></xsl:if>
+  <xsl:if test="./transient[text() = 'True']"><transient/></xsl:if>
 </disk>
 </xsl:template>
 

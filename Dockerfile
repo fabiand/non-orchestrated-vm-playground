@@ -5,11 +5,13 @@ RUN curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-releas
 
 
 ADD yaml2xml /
-ADD vmspec2domxml.xslt /
-ADD domxml2qemu.xslt /
-ADD launch-VirtualMachine /
+
 RUN ln -s launch-VirtualMachine launch
 
 ADD data/vm.yaml /
 
 CMD /launch-VirtualMachine
+
+ADD vmspec2domxml.xslt /
+ADD domxml2qemu.xslt /
+ADD launch-VirtualMachine /

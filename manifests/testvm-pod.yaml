@@ -8,8 +8,9 @@ spec:
   containers:
   - name: machine
     image: docker.io/fabiand/lvm
-    #command: ["/usr/bin/sleep", "inf"]
     command: ["/launch"]
+    stdin: True
+    tty: True
     ports:
     - containerPort: 5942
       protocol: TCP
