@@ -64,3 +64,9 @@ $ kubectl apply -f manifests/deployment.yaml
 # See the spawned pods
 $ kubectl get pods
 ```
+
+## Known Issues
+
+- Alpine does not bring up networking by default
+- Exposing ports is [not done yet](https://github.com/fabiand/pod-network-poc)
+- No checks about if the VM fits into the pod
