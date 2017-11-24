@@ -33,7 +33,11 @@
 
 <xsl:template match="devices/interface">\
   -netdev <xsl:value-of select="@type"/>,id=hostnet<xsl:value-of select="position()"/> \
-  -device <xsl:value-of select="model/@type"/>,netdev=hostnet<xsl:value-of select="position()"/>,id=net<xsl:value-of select="position()"/>,mac=<xsl:value-of select="mac/@address"/> \
+  -device <xsl:value-of select="model/@type"/>\
+,netdev=hostnet<xsl:value-of select="position()"/>\
+,id=net<xsl:value-of select="position()"/>\
+<xsl:if test="mac/@address">,mac=<xsl:value-of select="mac/@address"/></xsl:if>\
+ \
 </xsl:template>
 
 <xsl:template match="devices/video">\
