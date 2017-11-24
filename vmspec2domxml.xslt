@@ -5,7 +5,7 @@
 <xsl:strip-space elements="*"/>
 <xsl:preserve-space elements=""/>
 
-<xsl:template match="/">
+<xsl:template match="/VirtualMachine">
 <xsl:apply-templates select="VirtualMachine"/> 
 </xsl:template>
 
