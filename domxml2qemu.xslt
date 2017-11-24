@@ -10,12 +10,12 @@
 <xsl:choose>
   <xsl:when test="devices/emulator/text()"><xsl:value-of select="devices/emulator"/></xsl:when>
   <xsl:otherwise>qemu-system-x86_64</xsl:otherwise>
-</xsl:choose> \
+</xsl:choose> -serial mon:stdio \
   -name <xsl:value-of select="name"/> \
 <xsl:if test="uuid/text()">  -uuid <xsl:value-of select="uuid"/></xsl:if> \
   -m <xsl:value-of select="memory div 1024"/><!-- FIXME needs to respect unit --> \
   -smp <xsl:value-of select="vcpu"/> \
-  -machine <xsl:value-of select="os/type/@machine"/>,accel=kvm \
+  -machine <xsl:value-of select="os/type/@machine"/>,accel=kvm:tcg \
   <xsl:apply-templates select="cpu"/> \
   <xsl:apply-templates select="devices/interface"/> \
   <xsl:apply-templates select="devices/video"/> \

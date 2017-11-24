@@ -27,7 +27,7 @@
   <features>
     <acpi/>
   </features>
-  <cpu mode='host-model'>
+  <cpu mode='max'>
     <model /><!--fixme-->
   </cpu>
   <devices>
@@ -73,6 +73,7 @@
       <!--xsl:attribute name="bus"><xsl:value-of select="./target/bus"/></xsl:attribute-->
     </target>
   </source>
+  <xsl:if test="./readonly[text() = 'True']"><readonly/></xsl:if>
 </disk>
 </xsl:template>
 
