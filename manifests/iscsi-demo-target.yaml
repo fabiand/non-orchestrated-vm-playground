@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iscsi-demo-target
+  namespace: kube-system
+spec:
+  ports:
+    - name: iscsi
+      port: 3260
+      targetPort: 3260
+  selector:
+    app: iscsi-demo-target
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:

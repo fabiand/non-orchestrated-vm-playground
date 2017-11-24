@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fabiand/xslt-domxml-to-native-qemu-argv.svg?branch=e2e)](https://travis-ci.org/fabiand/xslt-domxml-to-native-qemu-argv)
+
 # Building qemu commandline from a libvirt domxml
 
 Libvrti's domxml are neat to define a VM, however, sometimes you might just
