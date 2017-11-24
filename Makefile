@@ -16,11 +16,11 @@ push:
 
 deploy-deps:
 	kubectl apply -f manifests/iscsi-demo-target.yaml -f manifests/vm-resource.yaml
-	kubectl create -f data/vm.yaml || :
+	kubectl apply -f data/vm.yaml
 	./kubeObjWait pods
 
 test: deploy-deps
 	kubectl apply -f manifests/testvm-pod.yaml
 	./kubeObjWait pods
-	timeout 300 sh -c "until kubectl logs --tail=10 testvm | grep Welcome  ; do kubectl logs --tail=10 testvm ; sleep 10 ; done"
+	timeout 300 sh -c "until kubectl logs -f testvm ; do sleep 3 ; done > logs & tail -f logs | ( grep -m1 Welcome ; kill $$? )"
 	kubectl delete vms testvm

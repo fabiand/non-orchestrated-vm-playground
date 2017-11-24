@@ -9,6 +9,13 @@ if len(sys.argv) > 1:
     with open(sys.argv[1]) as src:
         vm = src.read()
 else:
-    vm =sys.stdin.read()
+    vm = sys.stdin.read()
 
-print(xmltodict.unparse({"VirtualMachine": yaml.load(vm)}, pretty=True))
+vmdata = yaml.load(vm)
+
+# Dropping these fields because they will lead to slahses in tag names
+for k in ["annotations", "labels"]:
+    if k in vmdata["metadata"]:
+        del vmdata["metadata"][k]
+
+print(xmltodict.unparse({"VirtualMachine": vmdata}, pretty=True))
