@@ -1,4 +1,4 @@
-# Run non orchestrated or standalone VMs
+# Run non-orchestrated (or standalone) VMs
 
 Non-orchestrated VMs could be VMs which are not managed by KubeVirt controllers,
 instead they are directly consumed by pods.

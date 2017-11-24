@@ -25,6 +25,8 @@ spec:
           type: raw
           cache: none
         source:
+          # The source is provided by the iSCSI demo target
+          # Usually you could use PVs here.
           host:
             name: iscsi-demo-target.default
             port: "3260"
