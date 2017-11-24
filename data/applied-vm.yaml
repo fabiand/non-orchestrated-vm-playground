@@ -1,0 +1,55 @@
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachine
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kubevirt.io/v1alpha1","kind":"VirtualMachine","metadata":{"annotations":{},"name":"testvm","namespace":"default"},"spec":{"domain":{"devices":{"consoles":[{"type":"pty"}],"disks":[{"device":"disk","driver":{"cache":"none","name":"qemu","type":"raw"},"snapshot":"external","source":{"host":{"name":"iscsi-demo-target.default","port":"3260"},"name":"iqn.2017-01.io.kubevirt:sn.42/2","protocol":"iscsi"},"target":{"dev":"vda"},"transient":true,"type":"network"}],"graphics":[{"type":"spice"}],"interfaces":[{"model":{"type":"e1000"},"source":{"network":"default"},"type":"network"}],"video":[{"type":"qxl"}]},"memory":{"unit":"MB","value":64},"os":{"type":{"os":"hvm"}},"type":"qemu"}}}
+  clusterName: ""
+  creationTimestamp: 2017-11-24T01:20:52Z
+  deletionGracePeriodSeconds: null
+  deletionTimestamp: null
+  generation: 0
+  name: testvm
+  namespace: default
+  resourceVersion: "12617"
+  selfLink: /apis/kubevirt.io/v1alpha1/namespaces/default/virtualmachines/testvm
+  uid: b6610c1e-d0b5-11e7-b3f7-5254002dee44
+spec:
+  domain:
+    devices:
+      consoles:
+      - type: pty
+      disks:
+      - device: disk
+        driver:
+          cache: none
+          name: qemu
+          type: raw
+        snapshot: external
+        source:
+          host:
+            name: iscsi-demo-target.default
+            port: "3260"
+          name: iqn.2017-01.io.kubevirt:sn.42/2
+          protocol: iscsi
+        target:
+          dev: vda
+        transient: true
+        type: network
+      graphics:
+      - type: spice
+      interfaces:
+      - model:
+          type: e1000
+        source:
+          network: default
+        type: network
+      video:
+      - type: qxl
+    memory:
+      unit: MB
+      value: 64
+    os:
+      type:
+        os: hvm
+    type: qemu
