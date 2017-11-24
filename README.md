@@ -7,6 +7,17 @@ If only a pod is required to launch a VM, then VMs can be used with everything
 which is launching pods. I.e. Deployments, ReplicaSets, …
 On the other hand this has drawbacks as the feature set is limited.
 
+## How it works
+
+The pod is responsible for launching the VM, so it does everything itself.
+The logic required to do this is shipped in the launch container.
+
+In general it works as follows:
+
+- Guess the VM definition to use
+- Pull down the VM definition
+- [Create the VM](launch.d/) based on this definition
+
 ## Entities
 
 The following example is generally using [this VM definition](manifests/vm.yaml)
