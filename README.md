@@ -7,6 +7,14 @@ If only a pod is required to launch a VM, then VMs can be used with everything
 which is launching pods. I.e. Deployments, ReplicaSets, …
 On the other hand this has drawbacks as the feature set is limited.
 
+## Entities
+
+The following example is generally using [this VM definition](manifests/vm.yaml)
+and [this pod definition](manifests/pod.yaml).
+In general it's worth to take a look into the `manifests/` dir.
+
+## Example
+
 ```bash
 # Deploy some dependencies
 $ kubectl apply -f manifests/deps.yaml
@@ -33,6 +41,8 @@ $ kubectl exec -it testvm
   $ nc -U /qmp-sock
   $ nc -U /monitor-sock
 ```
+
+## Higher level workload types
 
 This approach also works for higher level workloads:
 
