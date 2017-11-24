@@ -32,6 +32,7 @@
   </cpu>
   <devices>
     <xsl:apply-templates select="spec/domain/devices/disks"/>
+    <xsl:apply-templates select="spec/domain/devices/interfaces"/>
     <xsl:apply-templates select="spec/domain/devices/graphics"/>
     <xsl:apply-templates select="spec/domain/devices/video"/>
   </devices>
@@ -52,6 +53,12 @@
   <listen type='address'/>
   <image compression='off'/>
 </graphics>
+</xsl:template>
+
+<xsl:template match="devices/interfaces">
+<interface type="user">
+  <!--xsl:attribute name="type"><xsl:value-of select="./type"/></xsl:attribute-->
+</interface>
 </xsl:template>
 
 <xsl:template match="devices/disks[type = 'network']">

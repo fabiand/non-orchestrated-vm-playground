@@ -11,9 +11,6 @@ else
   kubectl get -o yaml vms ${1:-$(hostname)} ;
 fi
 }
-doit_cond() {
-[[ -z "$DRY" ]] && eval "$(cat)" || cat
-}
 
 echo Args:
 echo $@
@@ -23,4 +20,8 @@ getYAML "$1" \
   | mirror | ./yaml2xml \
   | mirror | xsltproc vmspec2domxml.xslt /dev/stdin \
   | mirror | xsltproc domxml2qemu.xslt /dev/stdin \
-  | mirror | doit_cond
+  | mirror > launchline
+
+cat launchline
+
+[[ -z "$DRY" ]] && bash launchline
