@@ -1,3 +1,4 @@
+# https://kinvolk.io/blog/2017/10/running-kubernetes-on-travis-ci-with-minikube/
 sudo: required
 
 env:
