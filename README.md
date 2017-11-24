@@ -65,7 +65,7 @@ $ kubectl exec -it testvm
   $ nc -U /monitor-sock
 ```
 
-## Higher level workload types
+### Higher level workload types
 
 This approach also works for higher level workloads:
 
