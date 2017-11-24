@@ -26,6 +26,18 @@ In general it's worth to take a look into the [`manifests/`](manifests/) dir.
 
 ## Example
 
+You will need `minikube` or a different Kubernetes cluster.
+
+The next step is to clone the repository (not required, but then you can cut
+and paste the steps below).
+
+```bash
+$ git clone https://github.com/fabiand/non-orchestrated-vm-playground/
+$ cd non-orchestrated-vm-playground
+```
+
+Now we can start to setup the cluster:
+
 ```bash
 # Deploy some dependencies
 $ kubectl apply -f manifests/deps.yaml
