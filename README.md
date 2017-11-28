@@ -52,17 +52,16 @@ $ kubectl apply -f manifests/pod.yaml
 # To watch it boot
 $ kubectl logs -f testvm
 
-# To access it
-$ kubectl attach -it testvm
+# To access the serial
+$ kubectl exec -it testvm /vm/serial
 
-# To access it's display
-$ kubectl port-forward 5942
+# To access the monitor
+$ kubectl exec -it testvm /vm/monitor
+$ kubectl exec -it testvm /vm/qmp
+
+# To access it's vnc display
+$ socat SYSTEM:"kubectl exec -i testvm /vm/vnc" tcp-listen:5942
 $ remote-viewer spice://127.0.0.1:5942
-
-# To access it's monitor and qmp
-$ kubectl exec -it testvm
-  $ nc -U /qmp-sock
-  $ nc -U /monitor-sock
 ```
 
 ### Higher level workload types

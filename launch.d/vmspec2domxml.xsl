@@ -47,11 +47,9 @@
 </video>
 </xsl:template>
 
-<xsl:template match="devices/graphics[type = 'spice']">
-<graphics autoport="yes">
+<xsl:template match="devices/graphics">
+<graphics>
   <xsl:attribute name="type"><xsl:value-of select="./type"/></xsl:attribute>
-  <listen type='address'/>
-  <image compression='off'/>
 </graphics>
 </xsl:template>
 
