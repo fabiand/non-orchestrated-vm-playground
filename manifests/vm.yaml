@@ -2,6 +2,7 @@ apiVersion: kubevirt.io/v1alpha1
 kind: VirtualMachine
 metadata:
   name: testvm
+  uuid: 3fe93aa1-a08c-422d-b4c6-c81061e619b0
 spec:
   domain:
     devices:

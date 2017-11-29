@@ -41,15 +41,16 @@
 </xsl:template>
 
 <xsl:template match="devices/video">\
-  -device <xsl:value-of select="model/@type"/>,id=video<xsl:value-of select="position()"/>\
+ -vga <xsl:value-of select="model/@type"/>\
+<!--  -device <xsl:value-of select="model/@type"/>,id=video<xsl:value-of select="position()"/>\
 <xsl:if test="model/@ram">,ram_size=<xsl:value-of select="model/@ram * 1024"/></xsl:if>\
 <xsl:if test="model/@vram">,vram_size=<xsl:value-of select="model/@vram * 1024"/></xsl:if>\
-<xsl:if test="model/@vgamem">,vgamem_mb=<xsl:value-of select="model/@vgamem div 1024"/></xsl:if>\
+<xsl:if test="model/@vgamem">,vgamem_mb=<xsl:value-of select="model/@vgamem div 1024"/></xsl:if>-->\
  \
 </xsl:template>
 
 <xsl:template match="devices/graphics[@type='spice']">\
--spice port=5942,addr=0.0.0.0,disable-ticketing,image-compression=off,seamless-migration=on \
+-spice unix,addr=./spice,disable-ticketing \
 </xsl:template>
 
 <xsl:template match="devices/graphics[@type='vnc']">\
