@@ -61,7 +61,7 @@ $ kubectl exec -it testvm /vm/qmp
 
 # To access it's vnc display
 $ socat SYSTEM:"kubectl exec -i testvm /vm/vnc" tcp-listen:5942
-$ remote-viewer spice://127.0.0.1:5942
+$ remote-viewer vnc://127.0.0.1:5942
 ```
 
 ### Higher level workload types
